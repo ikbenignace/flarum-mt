@@ -9,7 +9,6 @@
 // 4b. If the folder exists, do nothing and go further
 // 4c. If the folder does not exist, create a new folder with the name of the domain in the folder "domains" and copy the folder "storage" in that folder, do the same for public folder (but only the assets folder) with symlink to the original files in the public folder (.htaccess, index.php, web.config)
 
-include __DIR__.'/domain.php';
 
 return array(
     'debug' => false,
@@ -17,7 +16,7 @@ return array(
     'database' => array(
         'driver' => getenv('DB_DRIVER') ?: 'mysql',
         'host' => getenv('DB_HOST') ?: 'localhost',
-        'database' =>  $domain,
+        'database' =>  $_SERVER['HTTP_HOST'],
         'username' => getenv('DB_USER') ?: 'root',
         'password' => getenv('DB_PASSWORD') ?: '',
         'charset' => getenv('DB_CHARSET') ?: 'utf8mb4',
@@ -26,7 +25,7 @@ return array(
         'port' => getenv('DB_PORT') ?: '3306',
         'strict' => false,
     ),
-    'url' => 'https://' . $domain,
+    'url' => 'https://' . $_SERVER['HTTP_HOST'],
     'paths' => array(
         'api' => 'api',
         'admin' => 'admin',

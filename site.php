@@ -1,7 +1,11 @@
 <?php
 
+use Flarum\Testing\integration\Setup\SetupScript;
+
+
 require __DIR__.'/vendor/autoload.php';
 include __DIR__.'/domain.php';
+
 
 function setupDomainFolders($domain) {
     $domainPath = __DIR__ . "/domains/$domain";
@@ -50,17 +54,25 @@ function getDatabaseNameFromDomain($domain, $cli) {
         $databases[] = $row['Database'];
     }
 
-    $mysqli->close();
 
     if (in_array($domain, $databases)) {
-        // TODO
-        // get tables of the database
-        // if no tables found, run migration script
+        // Get tables of the database
+        $tablesResult = $mysqli->query("SHOW TABLES FROM $domain");
+        if ($tablesResult->num_rows == 0) {
+            // No tables found
+            $migration = new SetupScript();
+            $migration->run();
+        }
+
+        $mysqli->close();
+
         return $domain;
     } else {
         if(!$cli) http_response_code(404);
+        $mysqli->close();
         die('Nothing found on this domain: ' . $domain);
     }
+
 }
 
 function recurseCopy($src, $dst) {
