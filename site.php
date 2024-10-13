@@ -2,6 +2,14 @@
 
 require __DIR__.'/vendor/autoload.php';
 
+//log all arguments in cli
+if (php_sapi_name() == 'cli') {
+    echo "Arguments: \n";
+    foreach ($argv as $arg) {
+        echo $arg . "\n";
+    }
+}
+
 function setupDomainFolders($domain) {
     $domainPath = __DIR__ . "/domains/$domain";
     $storageSource = __DIR__ . "/storage";
@@ -52,6 +60,9 @@ function getDatabaseNameFromDomain($domain) {
     $mysqli->close();
 
     if (in_array($domain, $databases)) {
+        // TODO
+        // get tables of the database
+        // if no tables found, run migration script
         return $domain;
     } else {
         http_response_code(404);
