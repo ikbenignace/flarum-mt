@@ -16,7 +16,7 @@ return array(
     'database' => array(
         'driver' => getenv('DB_DRIVER') ?: 'mysql',
         'host' => getenv('DB_HOST') ?: 'localhost',
-        'database' =>  $_SERVER['HTTP_HOST'],
+        'database' =>  $domain,
         'username' => getenv('DB_USER') ?: 'root',
         'password' => getenv('DB_PASSWORD') ?: '',
         'charset' => getenv('DB_CHARSET') ?: 'utf8mb4',
@@ -25,7 +25,7 @@ return array(
         'port' => getenv('DB_PORT') ?: '3306',
         'strict' => false,
     ),
-    'url' => 'https://' . $_SERVER['HTTP_HOST'],
+    'url' => 'https://' . $domain,
     'paths' => array(
         'api' => 'api',
         'admin' => 'admin',

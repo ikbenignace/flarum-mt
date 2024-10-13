@@ -45,7 +45,7 @@ function createSymlink($target, $link) {
     }
 }
 
-function getDatabaseNameFromDomain($domain) {
+function getDatabaseNameFromDomain($domain, $cli) {
     $mysqli = new mysqli(getenv('DB_HOST') ?: 'localhost', getenv('DB_USER') ?: 'root', getenv('DB_PASSWORD') ?: '');
     if ($mysqli->connect_error) {
         die('Connect Error (' . $mysqli->connect_errno . ') ' . $mysqli->connect_error);
@@ -65,7 +65,7 @@ function getDatabaseNameFromDomain($domain) {
         // if no tables found, run migration script
         return $domain;
     } else {
-        http_response_code(404);
+        if(!$cli) http_response_code(404);
         die('Nothing found on this domain: ' . $domain);
     }
 }
@@ -85,17 +85,20 @@ function recurseCopy($src, $dst) {
     closedir($dir);
 }
 
+$cli = false;
+
 if (isset($_SERVER['HTTP_HOST'])) {
     $domain = $_SERVER['HTTP_HOST'];
     echo "Using HTTP_HOST: $domain\n";
 } elseif (isset($argv[1])) {
     $domain = $argv[1];
     echo "Using CLI argument: $domain\n";
+    $cli = true;
 } else {
     die('No domain specified.');
 }
 
-$databaseName = getDatabaseNameFromDomain($domain);
+$databaseName = getDatabaseNameFromDomain($domain, $cli);
 setupDomainFolders($domain);
 
 return Flarum\Foundation\Site::fromPaths([
