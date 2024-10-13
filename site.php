@@ -1,6 +1,7 @@
 <?php
 
 require __DIR__.'/vendor/autoload.php';
+include __DIR__.'/domain.php';
 
 function setupDomainFolders($domain) {
     $domainPath = __DIR__ . "/domains/$domain";
@@ -77,18 +78,7 @@ function recurseCopy($src, $dst) {
     closedir($dir);
 }
 
-$cli = false;
 
-if (isset($_SERVER['HTTP_HOST'])) {
-    $domain = $_SERVER['HTTP_HOST'];
-    echo "Using HTTP_HOST: $domain\n";
-} elseif (isset($argv[2])) {
-    $domain = $argv[2];
-    echo "Using CLI argument: $domain\n";
-    $cli = true;
-} else {
-    die('No domain specified.');
-}
 
 $databaseName = getDatabaseNameFromDomain($domain, $cli);
 setupDomainFolders($domain);

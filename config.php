@@ -9,6 +9,7 @@
 // 4b. If the folder exists, do nothing and go further
 // 4c. If the folder does not exist, create a new folder with the name of the domain in the folder "domains" and copy the folder "storage" in that folder, do the same for public folder (but only the assets folder) with symlink to the original files in the public folder (.htaccess, index.php, web.config)
 
+include __DIR__.'/domain.php';
 
 return array(
     'debug' => false,
