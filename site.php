@@ -60,8 +60,22 @@ function getDatabaseNameFromDomain($domain, $cli) {
         $tablesResult = $mysqli->query("SHOW TABLES FROM $domain");
         if ($tablesResult->num_rows == 0) {
             // No tables found
+
+            // Backup config.php
+            $configPath = __DIR__ . "/config.php";
+            $backupConfigPath = __DIR__ . "/config.backup.php";
+            if (!copy($configPath, $backupConfigPath)) {
+            die('Failed to backup config.php');
+            }
+
+            // Run migration
             $migration = new SetupScript();
             $migration->run();
+
+            // Restore config.php
+            if (!copy($backupConfigPath, $configPath)) {
+                die('Failed to restore config.php');
+            }
         }
 
         $mysqli->close();

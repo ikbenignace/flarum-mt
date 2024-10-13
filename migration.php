@@ -135,7 +135,7 @@ class SetupScript
             ->build();
 
         // Run the actual configuration
-        //$pipeline->run();
+        $pipeline->run();
 
         echo "Installation complete\n";
     }
