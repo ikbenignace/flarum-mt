@@ -7,6 +7,8 @@
  * LICENSE file that was distributed with this source code.
  */
 
+require_once __DIR__ . '/UsesTmpDir.php';
+
 
 use Flarum\Foundation\Paths;
 use Flarum\Install\AdminUser;
