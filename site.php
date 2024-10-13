@@ -89,7 +89,7 @@ function getDatabaseNameFromDomain($domain) {
         return $domain;
     } else {
         http_response_code(404);
-        die('404 Not Found');
+        die(`Not found on this domain: $domain but found databases: ` . implode(', ', $databases));
     }
 }
 
