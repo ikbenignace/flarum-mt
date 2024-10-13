@@ -85,7 +85,16 @@ function recurseCopy($src, $dst) {
     closedir($dir);
 }
 
-$domain = $_SERVER['HTTP_HOST'];
+if (isset($_SERVER['HTTP_HOST'])) {
+    $domain = $_SERVER['HTTP_HOST'];
+    echo "Using HTTP_HOST: $domain\n";
+} elseif (isset($argv[1])) {
+    $domain = $argv[1];
+    echo "Using CLI argument: $domain\n";
+} else {
+    die('No domain specified.');
+}
+
 $databaseName = getDatabaseNameFromDomain($domain);
 setupDomainFolders($domain);
 
