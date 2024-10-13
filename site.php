@@ -109,7 +109,7 @@ function recurseCopy($src, $dst) {
 }
 
 // Get the current domain
-$domain = $_SERVER['SERVER_NAME'];
+$domain = $_SERVER['HTTP_HOST'];
 
 // Get the database name based on the domain
 $databaseName = getDatabaseNameFromDomain($domain);
