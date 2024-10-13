@@ -2,14 +2,6 @@
 
 require __DIR__.'/vendor/autoload.php';
 
-//log all arguments in cli
-if (php_sapi_name() == 'cli') {
-    echo "Arguments: \n";
-    foreach ($argv as $arg) {
-        echo $arg . "\n";
-    }
-}
-
 function setupDomainFolders($domain) {
     $domainPath = __DIR__ . "/domains/$domain";
     $storageSource = __DIR__ . "/storage";
@@ -90,8 +82,8 @@ $cli = false;
 if (isset($_SERVER['HTTP_HOST'])) {
     $domain = $_SERVER['HTTP_HOST'];
     echo "Using HTTP_HOST: $domain\n";
-} elseif (isset($argv[1])) {
-    $domain = $argv[1];
+} elseif (isset($argv[2])) {
+    $domain = $argv[2];
     echo "Using CLI argument: $domain\n";
     $cli = true;
 } else {
