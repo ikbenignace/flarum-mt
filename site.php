@@ -57,7 +57,7 @@ function getDatabaseNameFromDomain($domain, $cli) {
 
     if (in_array($domain, $databases)) {
         // Get tables of the database
-        $tablesResult = $mysqli->query("SHOW TABLES FROM $domain");
+        $tablesResult = $mysqli->query("SHOW TABLES FROM `$domain`");
         if ($tablesResult->num_rows == 0) {
             // No tables found
 
