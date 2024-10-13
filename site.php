@@ -1,13 +1,13 @@
 <?php
 
-use Flarum\Testing\integration\Setup\SetupScript;
 
-
+global $domain, $cli;
 require __DIR__.'/vendor/autoload.php';
 include __DIR__.'/domain.php';
 
 
-function setupDomainFolders($domain) {
+function setupDomainFolders($domain): void
+{
     $domainPath = __DIR__ . "/domains/$domain";
     $storageSource = __DIR__ . "/storage";
     $publicSource = __DIR__ . "/public";
@@ -90,7 +90,8 @@ function getDatabaseNameFromDomain($domain, $cli) {
 
 }
 
-function recurseCopy($src, $dst) {
+function recurseCopy($src, $dst): void
+{
     $dir = opendir($src);
     @mkdir($dst);
     while (false !== ($file = readdir($dir))) {

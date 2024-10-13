@@ -7,7 +7,6 @@
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Flarum\Testing\integration\Setup;
 
 use Flarum\Foundation\Paths;
 use Flarum\Install\AdminUser;
@@ -15,7 +14,6 @@ use Flarum\Install\BaseUrl;
 use Flarum\Install\DatabaseConfig;
 use Flarum\Install\Installation;
 use Flarum\Install\Steps\ConnectToDatabase;
-use UsesTmpDir;
 
 class SetupScript
 {
