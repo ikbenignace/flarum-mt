@@ -63,9 +63,9 @@ function getDatabaseNameFromDomain($domain, $cli) {
 
             // Backup config.php
             $configPath = __DIR__ . "/config.php";
-            $backupConfigPath = __DIR__ . "/config.backup.php";
-            if (!copy($configPath, $backupConfigPath)) {
-            die('Failed to backup config.php');
+            $configContents = file_get_contents($configPath);
+            if ($configContents === false) {
+                die('Failed to read config.php');
             }
 
             // Run migration
@@ -73,7 +73,8 @@ function getDatabaseNameFromDomain($domain, $cli) {
             $migration->run();
 
             // Restore config.php
-            if (!copy($backupConfigPath, $configPath)) {
+
+            if (file_put_contents($configPath, $configContents) === false) {
                 die('Failed to restore config.php');
             }
         }
