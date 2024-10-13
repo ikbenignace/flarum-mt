@@ -4,7 +4,7 @@
 global $domain, $cli;
 require __DIR__.'/vendor/autoload.php';
 include __DIR__.'/domain.php';
-
+require_once __DIR__ . '/SetupScript.php';
 
 function setupDomainFolders($domain): void
 {
