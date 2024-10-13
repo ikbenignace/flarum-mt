@@ -8,8 +8,10 @@ if (isset($_SERVER['HTTP_HOST'])) {
     echo "Using HTTP_HOST: $domain\n";
 } elseif (isset($argv[2])) {
     $domain = $argv[2];
-    echo "Using CLI argument: $domain\n";
     $cli = true;
+    echo "Using CLI argument: $domain\n";
 } else {
-    die('No domain specified.');
+    if ($domain === null) {
+        die('No domain specified.');
+    }
 }
