@@ -45,6 +45,6 @@ require __DIR__.'/vendor/autoload.php';
 
 return Flarum\Foundation\Site::fromPaths([
     'base' => __DIR__,
-    'public' => __DIR__.'//domains/'. $_SERVER['SERVER_NAME'] .'/public',
-    'storage' => __DIR__.'/domains/'. $_SERVER['SERVER_NAME'] .'/storage',
+    'public' => __DIR__.'/domains/'.$_SERVER['SERVER_NAME'].'/public',
+    'storage' => __DIR__.'/domains/'.$_SERVER['SERVER_NAME'].'/storage',
 ]);
