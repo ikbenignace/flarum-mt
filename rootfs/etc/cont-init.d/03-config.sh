@@ -125,13 +125,14 @@ for domain in "${ADDR[@]}"; do
     echo "Creating domain folder for ${domain}..."
     mkdir -p "${domainPath}"
     cp -Rf /opt/flarum/storage "${domainPath}/storage"
-    cp -Rf /opt/flarum/public/assets "${domainPath}/assets"
+    mkdir -p "${domainPath}/public"
+    cp -Rf /opt/flarum/public/assets "${domainPath}/public/assets"
 
-    ln -sf /opt/flarum/public/index.php "${domainPath}/index.php"
-    ln -sf /opt/flarum/public/.htaccess "${domainPath}/.htaccess"
-    ln -sf /opt/flarum/public/web.config "${domainPath}/web.config"
-    chown -h flarum. "${domainPath}/index.php" "${domainPath}/.htaccess" "${domainPath}/web.config"
-    fixperms "${domainPath}/storage" "${domainPath}/assets"
+    ln -sf /opt/flarum/public/index.php "${domainPath}/public/index.php"
+    ln -sf /opt/flarum/public/.htaccess "${domainPath}/public/.htaccess"
+    ln -sf /opt/flarum/public/web.config "${domainPath}/puglic/web.config"
+    chown -h flarum. "${domainPath}/public/index.php" "${domainPath}/public/.htaccess" "${domainPath}/public/web.config"
+    fixperms "${domainPath}/storage" "${domainPath}/public"
 
     echo "Domain folder for ${domain} created!"
   else
