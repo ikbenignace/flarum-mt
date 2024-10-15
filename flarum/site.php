@@ -108,11 +108,11 @@ function recurseCopy($src, $dst): void
 
 
 
-$databaseName = getDatabaseNameFromDomain($domain, $cli);
-setupDomainFolders($domain);
+//$databaseName = getDatabaseNameFromDomain($domain, $cli);
+//setupDomainFolders($domain);
 
 return Flarum\Foundation\Site::fromPaths([
     'base' => __DIR__,
-    'public' => __DIR__.'/domains/'.$domain.'/public',
-    'storage' => __DIR__.'/domains/'.$domain.'/storage',
+    'public' => __DIR__ . '/domains/' .$domain.'/public',
+    'storage' => __DIR__ . '/domains/' .$domain.'/storage',
 ]);
