@@ -186,7 +186,7 @@ for domain in "${ADDR[@]}"; do
 
   if ! echo 'SHOW DATABASES' | ${dbcmd} | grep -q "^${domain}$"; then
     echo "Creating database ${domain}..."
-    echo "CREATE DATABASE ${domain};" | ${dbcmd}
+    echo "CREATE DATABASE \`${domain}\`;" | ${dbcmd}
   fi
 
   counttables=$(echo 'SHOW TABLES' | ${dbcmd} "$domain" | wc -l)
