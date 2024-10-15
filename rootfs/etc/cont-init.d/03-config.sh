@@ -201,7 +201,7 @@ baseUrl: https://${domain}
 databaseConfiguration:
   driver: mysql
   host: ${DB_HOST}
-  database: ${domain}
+  database: "${domain}"
   username: ${DB_USER}
   password: ${DB_PASSWORD}
   prefix: ${DB_PREFIX}
@@ -214,7 +214,7 @@ adminUser:
 settings:
   forum_title: ${domain}
 EOL
-      yasu flarum:flarum php flarum install "${domain}" --file=/tmp/config.yml
+      yasu flarum:flarum php flarum --file=/tmp/config.yml
       yasu flarum:flarum touch /data/assets/rev-manifest.json
       echo ">>"
       echo ">> WARNING: Flarum has been installed with the default credentials (flarum/flarum)"
