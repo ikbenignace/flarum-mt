@@ -118,6 +118,7 @@ fixperms /data/assets /data/extensions /data/storage /opt/flarum/vendor /opt/fla
 # If not, create it and copy the default folders
 
 IFS=',' read -ra ADDR <<< "$DOMAINS"
+echo "Creating domain folders for ${DOMAINS}..."
 for domain in "${ADDR[@]}"; do
   domainPath="/opt/flarum/domains/${domain}"
   if [ ! -d "${domainPath}" ]; then
@@ -213,7 +214,7 @@ adminUser:
 settings:
   forum_title: ${domain}
 EOL
-      yasu flarum:flarum php flarum install --file=/tmp/config.yml
+      yasu flarum:flarum php flarum install "${domain}" --file=/tmp/config.yml
       yasu flarum:flarum touch /data/assets/rev-manifest.json
       echo ">>"
       echo ">> WARNING: Flarum has been installed with the default credentials (flarum/flarum)"
