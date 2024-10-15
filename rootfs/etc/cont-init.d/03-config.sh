@@ -228,6 +228,8 @@ done
 
 # Delete config file and restore backup.config.php
 if [ -f /opt/flarum/backup.config.php ]; then
-  rm /opt/flarum/config.php
+  if [ -f /opt/flarum/config.php ]; then
+    rm /opt/flarum/config.php
+  fi
   mv /opt/flarum/backup.config.php /opt/flarum/config.php
 fi
