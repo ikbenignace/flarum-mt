@@ -201,7 +201,7 @@ baseUrl: https://${domain}
 databaseConfiguration:
   driver: mysql
   host: ${DB_HOST}
-  database: "${domain}"
+  database: ${domain}
   username: ${DB_USER}
   password: ${DB_PASSWORD}
   prefix: ${DB_PREFIX}
