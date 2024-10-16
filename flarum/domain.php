@@ -13,11 +13,6 @@ if (($argv && !in_array('install', $argv) || isset($_SERVER['HTTP_HOST']))) {
         $domain = $argv[2];
         //set http_host to domain
         $_SERVER['HTTP_HOST'] = $domain;
-    } else {
-        if ($domain === null) {
-            //log all args
-            die('No domain specified: ' . print_r($argv, true));
-        }
     }
 } else {
     if(!in_array('install', $argv)) {

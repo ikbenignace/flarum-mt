@@ -223,9 +223,38 @@ EOL
       echo ">> Please connect to https://${domain} and change them!"
       echo ">>"
   else
+
+    yasu flarum:flarum cat >/opt/flarum/config.php <<EOL
+<?php
+
+return array(
+    'debug' => false,
+    'offline' => false,
+    'database' => array(
+        'driver' => getenv('DB_DRIVER') ?: 'mysql',
+        'host' => getenv('DB_HOST') ?: 'localhost',
+        'database' =>  ${domain},
+        'username' => getenv('DB_USER') ?: 'root',
+        'password' => getenv('DB_PASSWORD') ?: '',
+        'charset' => getenv('DB_CHARSET') ?: 'utf8mb4',
+        'collation' => getenv('DB_COLLATION') ?: 'utf8mb4_unicode_ci',
+        'prefix' => getenv('DB_PREFIX') ?: '',
+        'port' => getenv('DB_PORT') ?: '3306',
+        'strict' => false,
+    ),
+    'url' => 'https://' . ${domain},
+    'paths' => array(
+        'api' => 'api',
+        'admin' => 'admin',
+    ),
+);
+EOL
+
     echo "Migrating database for domain ${domain}..."
-    yasu flarum:flarum php flarum migrate "$domain"
-    yasu flarum:flarum php flarum cache:clear "$domain"
+    yasu flarum:flarum php flarum migrate
+    yasu flarum:flarum php flarum cache:clear
+
+    yasu flarum:flarum rm /opt/flarum/config.php
   fi
 done
 
