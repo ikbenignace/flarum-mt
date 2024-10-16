@@ -5,7 +5,7 @@ use Symfony\Component\Yaml\Yaml;
 
 $domain = null;
 
-if (!in_array('install', $argv)) {
+if (!$argv) {
     if (isset($_SERVER['HTTP_HOST'])) {
         $domain = $_SERVER['HTTP_HOST'];
     } elseif (isset($argv[2])) {
@@ -19,24 +19,25 @@ if (!in_array('install', $argv)) {
         }
     }
 } else {
-    $input = new ArgvInput();
-    if ($input->hasParameterOption('--file')) {
-        $filePath = $input->getParameterOption('--file');
-        if (file_exists($filePath)) {
-            $configurationFileContents = file_get_contents($filePath);
-            // Try parsing JSON
-            if (($json = json_decode($configurationFileContents, true)) !== null) {
-                //Use JSON if Valid
-                $configuration = $json;
-            } else {
-                //Else use YAML
-                $configuration = Yaml::parse($configurationFileContents);
-            }
+    if(!in_array('install', $argv)) {
+        $input = new ArgvInput();
+        if ($input->hasParameterOption('--file')) {
+            $filePath = $input->getParameterOption('--file');
+            if (file_exists($filePath)) {
+                $configurationFileContents = file_get_contents($filePath);
+                // Try parsing JSON
+                if (($json = json_decode($configurationFileContents, true)) !== null) {
+                    //Use JSON if Valid
+                    $configuration = $json;
+                } else {
+                    //Else use YAML
+                    $configuration = Yaml::parse($configurationFileContents);
+                }
 
-            $domain = $configuration['databaseConfiguration']['database'];
-        } else {
-            die('File not found: ' . $filePath);
+                $domain = $configuration['databaseConfiguration']['database'];
+            } else {
+                die('File not found: ' . $filePath);
+            }
         }
     }
-
 }
