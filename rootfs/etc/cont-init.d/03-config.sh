@@ -233,7 +233,7 @@ return array(
     'database' => array(
         'driver' => getenv('DB_DRIVER') ?: 'mysql',
         'host' => getenv('DB_HOST') ?: 'localhost',
-        'database' =>  ${domain},
+        'database' =>  "${domain}",
         'username' => getenv('DB_USER') ?: 'root',
         'password' => getenv('DB_PASSWORD') ?: '',
         'charset' => getenv('DB_CHARSET') ?: 'utf8mb4',
