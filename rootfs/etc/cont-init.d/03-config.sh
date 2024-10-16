@@ -224,37 +224,17 @@ EOL
       echo ">>"
   else
 
-    yasu flarum:flarum cat >/opt/flarum/config.php <<EOL
+    yasu flarum:flarum mv /opt/flarum/domain.php /opt/flarum/domain.php.bak
+    yasu flarum:flarum cat >/opt/flarum/domain.php <<EOL
 <?php
-
-return array(
-    'debug' => false,
-    'offline' => false,
-    'database' => array(
-        'driver' => getenv('DB_DRIVER') ?: 'mysql',
-        'host' => getenv('DB_HOST') ?: 'localhost',
-        'database' =>  "${domain}",
-        'username' => getenv('DB_USER') ?: 'root',
-        'password' => getenv('DB_PASSWORD') ?: '',
-        'charset' => getenv('DB_CHARSET') ?: 'utf8mb4',
-        'collation' => getenv('DB_COLLATION') ?: 'utf8mb4_unicode_ci',
-        'prefix' => getenv('DB_PREFIX') ?: '',
-        'port' => getenv('DB_PORT') ?: '3306',
-        'strict' => false,
-    ),
-    'url' => 'https://' . "${domain}",
-    'paths' => array(
-        'api' => 'api',
-        'admin' => 'admin',
-    ),
-);
+$domain = "${domain}";
 EOL
-
     echo "Migrating database for domain ${domain}..."
     yasu flarum:flarum php flarum migrate
     yasu flarum:flarum php flarum cache:clear
 
-    yasu flarum:flarum rm /opt/flarum/config.php
+    yasu flarum:flarum rm /opt/flarum/domain.php
+    yasu mv /opt/flarum/domain.php.bak /opt/flarum/domain.php
   fi
 done
 
