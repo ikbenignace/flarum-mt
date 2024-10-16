@@ -242,7 +242,7 @@ return array(
         'port' => getenv('DB_PORT') ?: '3306',
         'strict' => false,
     ),
-    'url' => 'https://' . ${domain},
+    'url' => 'https://' . "${domain}",
     'paths' => array(
         'api' => 'api',
         'admin' => 'admin',
