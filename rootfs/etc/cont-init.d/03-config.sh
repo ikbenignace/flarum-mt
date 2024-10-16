@@ -96,22 +96,23 @@ if [ "$LISTEN_IPV6" != "true" ]; then
 fi
 
 echo "Initializing files and folders..."
-mkdir -p /data/assets /data/extensions/.cache /data/domains
+mkdir -p /data/public/data/extensions/.cache /data/domains
 touch /data/extensions/list
 
 # For each domain, create a configuration file
 
-cp -Rf /opt/flarum/public/assets /data
+#cp -Rf /opt/flarum/public /data
 cp -Rf /opt/flarum/domains /data
-cp -Rf /opt/flarum/storage /data
+#cp -Rf /opt/flarum/storage /data
 
-rm -rf /opt/flarum/extensions /opt/flarum/public/assets /opt/flarum/storage /opt/flarum/public/domains
-ln -sf /data/assets /opt/flarum/public/assets
+#rm -rf /opt/flarum/extensions /opt/flarum/public /opt/flarum/storage /opt/flarum/domains
+rm -rf /opt/flarum/domains
+#ln -sf /data/public /opt/flarum/public
 ln -sf /data/extensions /opt/flarum/extensions
-ln -sf /data/storage /opt/flarum/storage
+#ln -sf /data/storage /opt/flarum/storage
 ln -sf /data/domains /opt/flarum/domains
-chown -h flarum. /opt/flarum/extensions /opt/flarum/public/assets /opt/flarum/domains /opt/flarum/storage
-fixperms /data/assets /data/extensions /data/storage /opt/flarum/vendor /opt/flarum/domains
+chown -h flarum. /opt/flarum/extensions /opt/flarum/public /opt/flarum/domains /opt/flarum/storage
+fixperms /data/public /data/extensions /data/storage /opt/flarum/vendor /opt/flarum/domains
 
 
 # For each domain, check if there is a folder with the name of the domain in /opt/flarum/domains
@@ -120,7 +121,7 @@ fixperms /data/assets /data/extensions /data/storage /opt/flarum/vendor /opt/fla
 IFS=',' read -ra ADDR <<< "$DOMAINS"
 echo "Creating domain folders for ${DOMAINS}..."
 for domain in "${ADDR[@]}"; do
-  domainPath="/opt/flarum/domains/${domain}"
+  domainPath="/data/domains/${domain}"
   if [ ! -d "${domainPath}" ]; then
     echo "Creating domain folder for ${domain}..."
     mkdir -p "${domainPath}"
