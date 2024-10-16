@@ -4,6 +4,7 @@ use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Yaml\Yaml;
 
 $domain = null;
+$argv = $argv ?? null;
 
 if (($argv && !in_array('install', $argv) || isset($_SERVER['HTTP_HOST']))) {
     if (isset($_SERVER['HTTP_HOST'])) {
