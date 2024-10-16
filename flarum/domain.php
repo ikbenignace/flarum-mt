@@ -5,7 +5,7 @@ use Symfony\Component\Yaml\Yaml;
 
 $domain = null;
 
-if (!$argv) {
+if (($argv && !in_array('install', $argv) || isset($_SERVER['HTTP_HOST']))) {
     if (isset($_SERVER['HTTP_HOST'])) {
         $domain = $_SERVER['HTTP_HOST'];
     } elseif (isset($argv[2])) {
