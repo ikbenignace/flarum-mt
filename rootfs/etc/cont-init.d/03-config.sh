@@ -227,14 +227,14 @@ EOL
     yasu flarum:flarum mv /opt/flarum/domain.php /opt/flarum/domain.php.bak
     yasu flarum:flarum cat >/opt/flarum/domain.php <<EOL
 <?php
-$domain = "${domain}";
+\$domain = "${domain}";
 EOL
     echo "Migrating database for domain ${domain}..."
     yasu flarum:flarum php flarum migrate
     yasu flarum:flarum php flarum cache:clear
 
     yasu flarum:flarum rm /opt/flarum/domain.php
-    yasu mv /opt/flarum/domain.php.bak /opt/flarum/domain.php
+    yasu flarum:flarum mv /opt/flarum/domain.php.bak /opt/flarum/domain.php
   fi
 done
 
