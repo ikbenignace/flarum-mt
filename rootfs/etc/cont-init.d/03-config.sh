@@ -130,7 +130,7 @@ for domain in "${ADDR[@]}"; do
 
     ln -sf /opt/flarum/public/index.php "${domainPath}/public/index.php"
     ln -sf /opt/flarum/public/.htaccess "${domainPath}/public/.htaccess"
-    ln -sf /opt/flarum/public/web.config "${domainPath}/puglic/web.config"
+    ln -sf /opt/flarum/public/web.config "${domainPath}/public/web.config"
     chown -h flarum. "${domainPath}/public/index.php" "${domainPath}/public/.htaccess" "${domainPath}/public/web.config"
     fixperms "${domainPath}/storage" "${domainPath}/public"
 
