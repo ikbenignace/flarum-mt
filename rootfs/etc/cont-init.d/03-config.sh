@@ -222,7 +222,13 @@ for domain in "${ADDR[@]}"; do
   fi
 
   counttables=$(echo 'SHOW TABLES' | ${dbcmd} "$domain" | wc -l)
-  
+
+  yasu flarum:flarum mv /opt/flarum/domain.php /opt/flarum/domain.php.bak
+  yasu flarum:flarum cat >/opt/flarum/domain.php <<EOL
+<?php
+\$domain = "${domain}";
+EOL
+
   if [ "$counttables" -eq 0 ]; then
     echo "First install detected for domain ${domain}!"
 
@@ -253,18 +259,13 @@ EOL
       echo ">>"
   else
 
-    yasu flarum:flarum mv /opt/flarum/domain.php /opt/flarum/domain.php.bak
-    yasu flarum:flarum cat >/opt/flarum/domain.php <<EOL
-<?php
-\$domain = "${domain}";
-EOL
+
     echo "Migrating database for domain ${domain}..."
     yasu flarum:flarum cd /opt/flarum && php flarum migrate
     yasu flarum:flarum cd /opt/flarum && php flarum cache:clear
-
-    yasu flarum:flarum rm /opt/flarum/domain.php
-    yasu flarum:flarum mv /opt/flarum/domain.php.bak /opt/flarum/domain.php
   fi
+  yasu flarum:flarum rm /opt/flarum/domain.php
+  yasu flarum:flarum mv /opt/flarum/domain.php.bak /opt/flarum/domain.php
 done
 
 # Delete config file and restore backup.config.php
