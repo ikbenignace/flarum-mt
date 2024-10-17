@@ -15,7 +15,7 @@ $config = array(
     'debug' => false,
     'offline' => false,
     'database' => array(
-        'driver' => getenv('DB_DRIVER') ?: 'mysql',
+        'driver' => 'mysql',
         'host' => getenv('DB_HOST') ?: 'localhost',
         'database' =>  "$domain",
         'username' => getenv('DB_USER') ?: 'root',
@@ -33,6 +33,8 @@ $config = array(
     ),
 );
 
-//print_r($config);
+// log the config as string
+file_put_contents(__DIR__ . '/config.log', print_r($config, true));
+
 
 return $config;
