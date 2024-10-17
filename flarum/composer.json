@@ -21,6 +21,8 @@
         "docs": "https://docs.flarum.org/"
     },
     "require": {
+        "flarum-lang/dutch": "*",
+        "flarum-lang/french": "*",
         "flarum/approval": "^1.8",
         "flarum/bbcode": "*",
         "flarum/core": "^1.8",
@@ -39,6 +41,13 @@
         "flarum/subscriptions": "*",
         "flarum/suspend": "*",
         "flarum/tags": "*",
+        "fof/drafts": "*",
+        "fof/formatting": "*",
+        "fof/nightmode": "*",
+        "fof/oauth": "^1.6",
+        "fof/polls": "*",
+        "fof/reactions": "*",
+        "fof/terms": "*",
         "vlucas/phpdotenv": "^5.6"
     },
     "config": {
