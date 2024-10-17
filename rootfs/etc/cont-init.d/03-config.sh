@@ -251,7 +251,7 @@ adminUser:
 settings:
   forum_title: ${domain}
 EOL
-      yasu flarum:flarum php flarum install --file=/tmp/config.yml
+      yasu flarum:flarum cd /opt/flarum && php flarum install --file=/tmp/config.yml
       yasu flarum:flarum touch /data/assets/rev-manifest.json
       echo ">>"
       echo ">> WARNING: Flarum has been installed with the default credentials (flarum/flarum)"
