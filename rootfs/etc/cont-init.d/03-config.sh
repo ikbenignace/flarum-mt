@@ -180,7 +180,7 @@ return array(
     'debug' => ${FLARUM_DEBUG},
     'offline' => false,
     'database' => array(
-        'driver' => '${DB_DRIVER}',
+        'driver' => 'mysql',
         'host' => '${DB_HOST}',
         'database' =>  '${DB_NAME}',
         'username' => '${DB_USER}',
