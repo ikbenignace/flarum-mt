@@ -11,7 +11,7 @@
 
 global $domain;
 
-return array(
+$config = array(
     'debug' => false,
     'offline' => false,
     'database' => array(
@@ -32,3 +32,7 @@ return array(
         'admin' => 'admin',
     ),
 );
+
+print_r($config);
+
+return $config;
