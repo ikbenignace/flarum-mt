@@ -170,6 +170,35 @@ if [ "$DB_NOPREFIX" = "true" ]; then
   DB_PREFIX=""
 fi
 
+# create config.php file
+cat > /opt/flarum/config.php <<EOL
+<?php
+
+global \$domain;
+
+return array(
+    'debug' => ${FLARUM_DEBUG},
+    'offline' => false,
+    'database' => array(
+        'driver' => '${DB_DRIVER}',
+        'host' => '${DB_HOST}',
+        'database' =>  '${DB_NAME}',
+        'username' => '${DB_USER}',
+        'password' => '${DB_PASSWORD}',
+        'charset' => 'utf8mb4',
+        'collation' => 'utf8mb4_unicode_ci',
+        'prefix' => '${DB_PREFIX}'
+        'port' => ${DB_PORT},
+        'strict' => false,
+    ),
+    'url' => 'https://' . \$domain,
+    'paths' => array(
+        'api' => 'api',
+        'admin' => 'admin',
+    ),
+);
+EOL
+
 if [ -f /opt/flarum/config.php ]; then
       mv /opt/flarum/config.php /opt/flarum/backup.config.php
 fi
