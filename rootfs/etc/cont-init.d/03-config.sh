@@ -199,9 +199,9 @@ return array(
 );
 EOL
 
-#if [ -f /opt/flarum/config.php ]; then
-#      mv /opt/flarum/config.php /opt/flarum/backup.config.php
-#fi
+if [ -f /opt/flarum/config.php ]; then
+      mv /opt/flarum/config.php /opt/flarum/backup.config.php
+fi
 
 counter=1
 IFS=',' read -ra ADDR <<< "$DOMAINS"
@@ -255,6 +255,10 @@ settings:
 EOL
       yasu flarum:flarum cd /opt/flarum && php flarum install --file=/tmp/config.yml
       yasu flarum:flarum touch /data/assets/rev-manifest.json
+      # If config file exists, remove it
+      if [ -f /opt/flarum/config.php ]; then
+        rm /opt/flarum/config.php
+      fi
       echo ">>"
       echo ">> WARNING: Flarum has been installed with the default credentials (flarum/flarum)"
       echo ">> Please connect to https://${domain} and change them!"
@@ -272,9 +276,9 @@ yasu flarum:flarum mv /opt/flarum/domain.php.bak /opt/flarum/domain.php
 
 
 # Delete config file and restore backup.config.php
-#if [ -f /opt/flarum/backup.config.php ]; then
-#  if [ -f /opt/flarum/config.php ]; then
-#    rm /opt/flarum/config.php
-#  fi
-#  mv /opt/flarum/backup.config.php /opt/flarum/config.php
-#fi
+if [ -f /opt/flarum/backup.config.php ]; then
+  if [ -f /opt/flarum/config.php ]; then
+    rm /opt/flarum/config.php
+  fi
+  mv /opt/flarum/backup.config.php /opt/flarum/config.php
+fi
