@@ -33,7 +33,7 @@ $config = array(
     ),
 );
 
-print_r($_ENV, getenv("DB_HOST"));
+print_r(getenv("DB_HOST"));
 
 // log the config as string
 file_put_contents(__DIR__ . '/config.log', print_r($config, true));
