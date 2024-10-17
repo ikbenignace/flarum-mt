@@ -199,9 +199,9 @@ return array(
 );
 EOL
 
-if [ -f /opt/flarum/config.php ]; then
-      mv /opt/flarum/config.php /opt/flarum/backup.config.php
-fi
+#if [ -f /opt/flarum/config.php ]; then
+#      mv /opt/flarum/config.php /opt/flarum/backup.config.php
+#fi
 
 counter=1
 IFS=',' read -ra ADDR <<< "$DOMAINS"
