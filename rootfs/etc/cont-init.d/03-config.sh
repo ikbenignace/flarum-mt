@@ -182,7 +182,7 @@ return array(
     'database' => array(
         'driver' => 'mysql',
         'host' => '${DB_HOST}',
-        'database' =>  '\$domain',
+        'database' =>  "\$domain",
         'username' => '${DB_USER}',
         'password' => '${DB_PASSWORD}',
         'charset' => 'utf8mb4',
