@@ -11,6 +11,9 @@
 
 global $domain;
 
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->safeLoad();
+
 $config = array(
     'debug' => false,
     'offline' => false,
