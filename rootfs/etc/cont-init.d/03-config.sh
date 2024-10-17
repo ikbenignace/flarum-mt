@@ -254,7 +254,7 @@ settings:
   forum_title: ${domain}
 EOL
       yasu flarum:flarum cd /opt/flarum && php flarum install --file=/tmp/config.yml
-      yasu flarum:flarum touch /data/assets/rev-manifest.json
+      yasu flarum:flarum touch /data/domains/"${domain}"/assets/rev-manifest.json
       # If config file exists, remove it
       if [ -f /opt/flarum/config.php ]; then
         rm /opt/flarum/config.php
