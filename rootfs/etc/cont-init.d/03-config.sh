@@ -253,10 +253,10 @@ adminUser:
 settings:
   forum_title: ${domain}
 EOL
-      cat /tmp/config.yml
+      yasu flarum:flarum cat /tmp/config.yml
       yasu flarum:flarum cd /opt/flarum && php flarum install --file=/tmp/config.yml
-      cat /opt/flarum/domain.php
-      cat /opt/flarum/config.php
+      yasu flarum:flarum cat /opt/flarum/domain.php
+      yasu flarum:flarum cat /opt/flarum/config.php
       yasu flarum:flarum touch /data/assets/rev-manifest.json
       echo ">>"
       echo ">> WARNING: Flarum has been installed with the default credentials (flarum/flarum)"
@@ -275,9 +275,9 @@ yasu flarum:flarum mv /opt/flarum/domain.php.bak /opt/flarum/domain.php
 
 
 # Delete config file and restore backup.config.php
-if [ -f /opt/flarum/backup.config.php ]; then
-  if [ -f /opt/flarum/config.php ]; then
-    rm /opt/flarum/config.php
-  fi
-  mv /opt/flarum/backup.config.php /opt/flarum/config.php
-fi
+#if [ -f /opt/flarum/backup.config.php ]; then
+#  if [ -f /opt/flarum/config.php ]; then
+#    rm /opt/flarum/config.php
+#  fi
+#  mv /opt/flarum/backup.config.php /opt/flarum/config.php
+#fi
