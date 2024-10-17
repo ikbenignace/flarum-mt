@@ -188,7 +188,7 @@ return array(
         'charset' => 'utf8mb4',
         'collation' => 'utf8mb4_unicode_ci',
         'prefix' => '${DB_PREFIX}'
-        'port' => ${DB_PORT},
+        'port' => '${DB_PORT}',
         'strict' => false,
     ),
     'url' => 'https://' . \$domain,
