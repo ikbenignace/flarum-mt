@@ -187,7 +187,7 @@ return array(
         'password' => '${DB_PASSWORD}',
         'charset' => 'utf8mb4',
         'collation' => 'utf8mb4_unicode_ci',
-        'prefix' => '${DB_PREFIX}'
+        'prefix' => '${DB_PREFIX}',
         'port' => '${DB_PORT}',
         'strict' => false,
     ),
