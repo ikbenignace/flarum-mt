@@ -248,6 +248,9 @@ EOL
   else
 
     echo "Migrating database for domain ${domain}..."
+    # cd /opt/flarum and logs 'ls' command
+    cd /opt/flarum && ls
+    # migrate and clear cache
     cd /opt/flarum && php flarum migrate
     cd /opt/flarum && php flarum cache:clear
   fi
