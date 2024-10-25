@@ -249,7 +249,7 @@ EOL
 
     echo "Migrating database for domain ${domain}..."
     cd /opt/flarum && php flarum migrate
-    yasu flarum:flarum cd /opt/flarum && php flarum cache:clear
+    cd /opt/flarum && php flarum cache:clear
   fi
   yasu flarum:flarum rm /opt/flarum/domain.php
 done
