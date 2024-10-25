@@ -58,6 +58,7 @@
         "fof/polls": "*",
         "fof/reactions": "*",
         "fof/share-social": "^1.2",
+        "fof/sitemap": "^2.2",
         "fof/subscribed": "*",
         "fof/terms": "*",
         "v17development/flarum-seo": "^2.0",
