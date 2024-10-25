@@ -96,7 +96,7 @@ if [ "$LISTEN_IPV6" != "true" ]; then
 fi
 
 echo "Initializing files and folders..."
-mkdir -p /data/public/data/extensions/.cache /data/domains
+mkdir -p /data/extensions/.cache /data/domains
 touch /data/extensions/list
 
 # For each domain, create a configuration file
