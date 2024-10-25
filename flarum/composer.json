@@ -21,7 +21,9 @@
         "docs": "https://docs.flarum.org/"
     },
     "require": {
+        "acpl/mobile-tab": "^1.4",
         "blomstra/gdpr": "@beta",
+        "blomstra/spam-prevention": "^1.7",
         "flarum-lang/dutch": "*",
         "flarum-lang/french": "*",
         "flarum/approval": "^1.8",
@@ -42,14 +44,25 @@
         "flarum/subscriptions": "*",
         "flarum/suspend": "*",
         "flarum/tags": "*",
+        "fof/best-answer": "*",
+        "fof/cookie-consent": "^1.1",
+        "fof/disposable-emails": "*",
         "fof/drafts": "*",
+        "fof/filter": "*",
+        "fof/follow-tags": "*",
         "fof/formatting": "*",
+        "fof/links": "^1.3",
         "fof/nightmode": "*",
         "fof/oauth": "^1.6",
+        "fof/pages": "^1.0",
         "fof/polls": "*",
         "fof/reactions": "*",
+        "fof/share-social": "^1.2",
+        "fof/subscribed": "*",
         "fof/terms": "*",
-        "vlucas/phpdotenv": "^5.6"
+        "v17development/flarum-seo": "^2.0",
+        "vlucas/phpdotenv": "^5.6",
+        "yannisme/oxotheme": "^2.1"
     },
     "config": {
         "preferred-install": "dist",
