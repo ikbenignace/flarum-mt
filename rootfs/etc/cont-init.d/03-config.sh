@@ -96,23 +96,14 @@ if [ "$LISTEN_IPV6" != "true" ]; then
 fi
 
 echo "Initializing files and folders..."
-mkdir -p /data/extensions/.cache /data/domains
-touch /data/extensions/list
-
+mkdir -p /data/domains
 # For each domain, create a configuration file
 
-#cp -Rf /opt/flarum/public /data
 cp -Rf /opt/flarum/domains /data
-#cp -Rf /opt/flarum/storage /data
-
-#rm -rf /opt/flarum/extensions /opt/flarum/public /opt/flarum/storage /opt/flarum/domains
 rm -rf /opt/flarum/domains
-#ln -sf /data/public /opt/flarum/public
-ln -sf /data/extensions /opt/flarum/extensions
-#ln -sf /data/storage /opt/flarum/storage
 ln -sf /data/domains /opt/flarum/domains
-chown -h flarum. /opt/flarum/extensions /opt/flarum/public /opt/flarum/domains /opt/flarum/storage
-fixperms /data/public /data/extensions /data/storage /opt/flarum/vendor /opt/flarum/domains
+chown -h flarum. /opt/flarum/public /opt/flarum/domains /opt/flarum/storage
+fixperms /data/public /data/storage /opt/flarum/vendor /opt/flarum/domains
 
 
 # For each domain, check if there is a folder with the name of the domain in /opt/flarum/domains
@@ -140,15 +131,6 @@ for domain in "${ADDR[@]}"; do
     echo "Domain folder for ${domain} already exists!"
   fi
 done
-
-if [ -s "/data/extensions/list" ]; then
-  while read extension; do
-    test -z "${extension}" && continue
-    extensions="${extensions}${extension} "
-  done </data/extensions/list
-  echo "Installing additional extensions..."
-  COMPOSER_CACHE_DIR="/data/extensions/.cache" yasu flarum:flarum composer require --working-dir /opt/flarum ${extensions}
-fi
 
 echo "Checking database connection..."
 if [ -z "$DB_HOST" ]; then
