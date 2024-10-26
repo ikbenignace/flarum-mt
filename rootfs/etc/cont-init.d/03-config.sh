@@ -249,6 +249,8 @@ EOL
 
     echo "Migrating database for domain ${domain}..."
     chown flarum. "/opt/flarum/domains/${domain}/storage/logs/flarum-installer.log"
+    cat /opt/flarum/domain.php
+    cat /opt/flarum/config.php
     cd /opt/flarum && yasu flarum:flarum php flarum migrate -vvv
     cd /opt/flarum && yasu flarum:flarum php flarum cache:clear -vvv
   fi
