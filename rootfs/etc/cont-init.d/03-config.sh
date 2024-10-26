@@ -248,6 +248,7 @@ EOL
   else
 
     echo "Migrating database for domain ${domain}..."
+    chown flarum. "/opt/flarum/domains/${domain}/storage/logs/flarum-installer.log"
     cd /opt/flarum && yasu flarum:flarum php flarum migrate
     cd /opt/flarum && yasu flarum:flarum php flarum cache:clear
   fi
