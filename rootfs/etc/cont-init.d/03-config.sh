@@ -12,6 +12,22 @@ function fixperms() {
   done
 }
 
+function restoreConfig() {
+  # Delete config file and restore backup.config.php
+  if [ -f /opt/flarum/backup.config.php ]; then
+    if [ -f /opt/flarum/config.php ]; then
+      rm /opt/flarum/config.php
+    fi
+    mv /opt/flarum/backup.config.php /opt/flarum/config.php
+  fi
+}
+
+function backupConfig() {
+  if [ -f /opt/flarum/config.php ]; then
+        mv /opt/flarum/config.php /opt/flarum/backup.config.php
+  fi
+}
+
 # From https://github.com/docker-library/mariadb/blob/master/docker-entrypoint.sh#L21-L41
 # usage: file_env VAR [DEFAULT]
 #    ie: file_env 'XYZ_DB_PASSWORD' 'example'
@@ -181,9 +197,7 @@ return array(
 );
 EOL
 
-if [ -f /opt/flarum/config.php ]; then
-      mv /opt/flarum/config.php /opt/flarum/backup.config.php
-fi
+backupConfig
 
 counter=1
 IFS=',' read -ra ADDR <<< "$DOMAINS"
@@ -246,13 +260,12 @@ EOL
       echo ">> Please connect to https://${domain} and change them!"
       echo ">>"
   else
-
     echo "Migrating database for domain ${domain}..."
     chown flarum. "/opt/flarum/domains/${domain}/storage/logs/flarum-installer.log"
-    cat /opt/flarum/domain.php
-    cat /opt/flarum/config.php
+    restoreConfig
     cd /opt/flarum && yasu flarum:flarum php flarum migrate -vvv
     cd /opt/flarum && yasu flarum:flarum php flarum cache:clear -vvv
+    backupConfig
   fi
   yasu flarum:flarum rm /opt/flarum/domain.php
 done
@@ -260,10 +273,4 @@ done
 yasu flarum:flarum mv /opt/flarum/domain.php.bak /opt/flarum/domain.php
 
 
-# Delete config file and restore backup.config.php
-if [ -f /opt/flarum/backup.config.php ]; then
-  if [ -f /opt/flarum/config.php ]; then
-    rm /opt/flarum/config.php
-  fi
-  mv /opt/flarum/backup.config.php /opt/flarum/config.php
-fi
+restoreConfig
