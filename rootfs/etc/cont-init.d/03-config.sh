@@ -248,8 +248,8 @@ EOL
   else
 
     echo "Migrating database for domain ${domain}..."
-    bash -c 'yasu flarum:flarum cd /opt/flarum && yasu flarum:flarum php flarum migrate'
-    bash -c 'yasu flarum:flarum cd /opt/flarum && yasu flarum:flarum php flarum cache:clear'
+    cd /opt/flarum && yasu flarum:flarum php flarum migrate
+    cd /opt/flarum && yasu flarum:flarum php flarum cache:clear
   fi
   yasu flarum:flarum rm /opt/flarum/domain.php
 done
