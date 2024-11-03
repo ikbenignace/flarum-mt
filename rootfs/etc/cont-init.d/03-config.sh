@@ -270,13 +270,13 @@ EOL
     restoreConfig
     cd /opt/flarum && yasu flarum:flarum php flarum migrate
     cd /opt/flarum && yasu flarum:flarum php flarum cache:clear
-    if [ ! -d "/opt/flarum/domains/${domain}/assets/fonts" ]; then
-      mkdir -p /opt/flarum/domains/"${domain}"/assets/fonts
-    fi
-    fixperms /opt/flarum/domains/"${domain}"/assets/fonts
-    chmod 775 -R /opt/flarum/domains/"${domain}"/assets
+    #if [ ! -d "/opt/flarum/domains/${domain}/public/assets/fonts" ]; then
+    #  mkdir -p /opt/flarum/domains/"${domain}"/assets/fonts
+    #fi
+    #fixperms /opt/flarum/domains/"${domain}"/assets/fonts
+    #chmod 775 -R /opt/flarum/domains/"${domain}"/assets
     cd /opt/flarum && yasu flarum:flarum php flarum assets:publish
-    cd /opt/flarum && php flarum assets:publish
+    cd /opt/flarum && yasu flarum:flarum php flarum assets:publish
     backupConfig
   fi
   yasu flarum:flarum rm /opt/flarum/domain.php
