@@ -265,10 +265,13 @@ EOL
       echo ">>"
   else
     echo "Migrating database for domain ${domain}..."
-    chown flarum. "/opt/flarum/domains/${domain}/storage/logs/flarum-installer.log"
+    if [ -f "/opt/flarum/domains/${domain}/storage/logs/flarum-installer.log" ]; then
+      chown flarum. "/opt/flarum/domains/${domain}/storage/logs/flarum-installer.log"
+    fi
     restoreConfig
     cd /opt/flarum && yasu flarum:flarum php flarum migrate
     cd /opt/flarum && yasu flarum:flarum php flarum cache:clear
+    fixperms /opt/flarum/domains/"${domain}"/assets/fonts
     cd /opt/flarum && yasu flarum:flarum php flarum assets:publish
     backupConfig
   fi
