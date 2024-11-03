@@ -271,7 +271,11 @@ EOL
     restoreConfig
     cd /opt/flarum && yasu flarum:flarum php flarum migrate
     cd /opt/flarum && yasu flarum:flarum php flarum cache:clear
-    fixperms /opt/flarum/domains/"${domain}"/assets/fonts
+    if [ ! -d "/opt/flarum/domains/${domain}/assets/fonts" ]; then
+      mkdir -p /opt/flarum/domains/"${domain}"/assets/fonts
+      fixperms /opt/flarum/domains/"${domain}"/assets/fonts
+    fi
+    cd /opt/flarum && yasu flarum:flarum php flarum assets:publish
     cd /opt/flarum && yasu flarum:flarum php flarum assets:publish
     backupConfig
   fi
