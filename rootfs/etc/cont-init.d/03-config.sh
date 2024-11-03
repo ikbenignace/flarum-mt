@@ -135,6 +135,7 @@ for domain in "${ADDR[@]}"; do
     cp -Rf /opt/flarum/storage "${domainPath}/storage"
     mkdir -p "${domainPath}/public"
     cp -Rf /opt/flarum/public/assets "${domainPath}/public/assets"
+    mkdir -p "${domainPath}/public/assets/fonts"
 
     ln -sf /opt/flarum/public/index.php "${domainPath}/public/index.php"
     ln -sf /opt/flarum/public/.htaccess "${domainPath}/public/.htaccess"
@@ -252,7 +253,7 @@ adminUser:
 settings:
   forum_title: ${forumTitle}
 EOL
-      cd /opt/flarum && php flarum install --file=/tmp/config.yml
+      cd /opt/flarum && yasu flarum:flarum php flarum install --file=/tmp/config.yml
       yasu flarum:flarum touch /data/domains/"${domain}"/assets/rev-manifest.json
       # If config file exists, remove it
       if [ -f /opt/flarum/config.php ]; then
