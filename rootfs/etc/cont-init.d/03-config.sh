@@ -230,6 +230,9 @@ EOL
   if [ "$tableCount" -eq 0 ]; then
     echo "First install detected for domain ${domain}!"
 
+    # If root domain is "communiceert.be", just take the subdomain and capitalize first letter, example.communiceert.be wil result in title: "Example Communiceert"
+    forumTitle=$(echo "${domain}" | awk -F'.' '{print toupper(substr($1,1,1)) substr($1,2) " " toupper(substr($2,1,1)) substr($2,2)}')
+
     yasu flarum:flarum cat >/tmp/config.yml <<EOL
 debug: ${FLARUM_DEBUG}
 baseUrl: https://${domain}
@@ -247,7 +250,7 @@ adminUser:
   password_confirmation: Flarum123*!
   email: flarum@flarum.docker
 settings:
-  forum_title: ${domain}
+  forum_title: ${forumTitle}
 EOL
       cd /opt/flarum && php flarum install --file=/tmp/config.yml
       yasu flarum:flarum touch /data/domains/"${domain}"/assets/rev-manifest.json
@@ -265,6 +268,7 @@ EOL
     restoreConfig
     cd /opt/flarum && yasu flarum:flarum php flarum migrate
     cd /opt/flarum && yasu flarum:flarum php flarum cache:clear
+    cd /opt/flarum && yasu flarum:flarum php flarum assets:publish
     backupConfig
   fi
   yasu flarum:flarum rm /opt/flarum/domain.php
